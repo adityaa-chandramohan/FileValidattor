@@ -1,0 +1,70 @@
+# File: validation-templates/employee-data.yaml
+name: Employee Data Validation
+description: Validates employee data including personal and employment information
+version: 1.0
+
+columns:
+  employee_id:
+    type: string
+    required: true
+    pattern: "^EMP[0-9]{6}$"
+    description: Employee ID in format EMP followed by 6 digits
+
+  first_name:
+    type: string
+    required: true
+    minLength: 2
+    maxLength: 50
+    description: Employee first name
+
+  last_name:
+    type: string
+    required: true
+    minLength: 2
+    maxLength: 50
+    description: Employee last name
+
+  date_of_birth:
+    type: date
+    required: true
+    format: YYYY-MM-DD
+    description: Date of birth in ISO format
+
+  email:
+    type: email
+    required: true
+    description: Employee email address
+
+  phone:
+    type: phone
+    required: true
+    description: Contact phone number
+
+  hire_date:
+    type: date
+    required: true
+    format: YYYY-MM-DD
+    description: Date employee was hired
+
+  department:
+    type: string
+    required: true
+    maxLength: 50
+    description: Employee department
+
+  salary:
+    type: number
+    required: true
+    min: 0
+    description: Annual salary
+
+  sin:
+    type: sin
+    required: true
+    description: Social Insurance Number (9 digits)
+
+  status:
+    type: string
+    required: true
+    pattern: "^(Active|On Leave|Terminated)$"
+    description: "Employment status: Active, On Leave, or Terminated"

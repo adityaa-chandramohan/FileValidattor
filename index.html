@@ -1,0 +1,119 @@
+<!-- File: public/index.html - Frontend UI -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File Validation App</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .container {
+      max-width: 800px;
+      margin-top: 30px;
+    }
+    .error-row {
+      background-color: #fff3f3;
+    }
+    .results-table {
+      font-size: 0.9rem;
+    }
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .loading-spinner {
+      width: 3rem;
+      height: 3rem;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="mb-4">File Validation Tool</h1>
+    
+    <div class="card mb-4">
+      <div class="card-header">
+        Upload File
+      </div>
+      <div class="card-body">
+        <form id="upload-form">
+          <div class="mb-3">
+            <label for="file" class="form-label">Select File (Excel or CSV)</label>
+            <input type="file" class="form-control" id="file" name="file" accept=".xlsx,.xls,.csv" required>
+          </div>
+          
+          <div class="mb-3">
+            <label for="template" class="form-label">Select Validation Template</label>
+            <select class="form-select" id="template" name="template" required>
+              <option value="">-- Select Template --</option>
+              <!-- Templates will be loaded dynamically -->
+            </select>
+          </div>
+          
+          <button type="submit" class="btn btn-primary">Validate File</button>
+        </form>
+      </div>
+    </div>
+    
+    <div id="results-section" class="card mb-4 hidden">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <span>Validation Results</span>
+        <button id="download-results" class="btn btn-sm btn-outline-secondary">Download Results</button>
+      </div>
+      <div class="card-body">
+        <div class="alert alert-info mb-3">
+          <div class="row">
+            <div class="col-md-4">
+              <strong>Total Rows:</strong> <span id="total-rows">0</span>
+            </div>
+            <div class="col-md-4">
+              <strong>Valid Rows:</strong> <span id="valid-rows">0</span>
+            </div>
+            <div class="col-md-4">
+              <strong>Invalid Rows:</strong> <span id="invalid-rows">0</span>
+            </div>
+          </div>
+        </div>
+        
+        <div id="error-details">
+          <h5>Error Details</h5>
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered results-table">
+              <thead>
+                <tr>
+                  <th>Row</th>
+                  <th>Field</th>
+                  <th>Error</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody id="errors-table-body">
+                <!-- Error details will be populated here -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="loading-overlay" class="loading-overlay hidden">
+    <div class="spinner-border text-light loading-spinner" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+  
+  <script src="script.js"></script>
+</body>
+</html>
